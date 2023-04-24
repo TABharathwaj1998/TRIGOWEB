@@ -1,0 +1,27 @@
+h1
+{
+	color: blue;
+        margin: 30px;
+}
+.border
+{
+       background: yellow;
+}
+.location 
+{
+        margin: 10px 0px 0px 0px;
+        padding: 0px 40px 40px 40px;
+        width: 20%;
+        height: 30%;
+}
+.btn
+{
+        background: blue;
+        color: white;
+}
+.list
+{
+        width: 200px;
+        height: 100px;
+        margin: 30px 30px;
+}

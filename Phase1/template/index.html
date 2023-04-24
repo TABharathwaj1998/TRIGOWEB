@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="./css/style.css">
+	<h1> TRIGO Global Quality Solutions </h1>
+</head>
+<body>
+	<form action ="/add" class="border" method="POST">
+		<label> Operator </label>
+		<label for="ContractNo"> Contract </label>
+		<input type="text" id="ContractNo" name="Contract" >
+		<input type="Submit" value="ADD"> 
+		<select class="list" size=2>
+			{%for i in list%}
+				<option>{{i}}</option>
+			{%endfor%}
+		</select>
+	</form>
+	<script src="scripts/script.js"></script>
+</body>
+</html>
