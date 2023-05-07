@@ -1,0 +1,15 @@
+h1
+{
+	color: blue;
+        margin: 30px;
+}
+.border
+{
+       background: yellow;
+}
+.list
+{
+        width: 200px;
+        height: 100px;
+        margin: 20px 20px;
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="./css/style.css">
+	<h1> TRIGO Global Quality Solutions </h1>
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+</head>
+<body>
+	<form class="border" method="POST">
+		<label> Operator </label><br>
+		<label for="ContractNo"> Contract </label>
+		<input type="text" id="ContractNo" name="Contract">
+		<input type="number" id="Contract" name="ContractRev">
+		<input type="number" id="WI" name="WIRev">
+		<input type="Submit" value="ADD" formaction='/add'><br>
+		<select class="list" id="no" size=2>
+			{%for i in list%}
+				<option>{{i}}</option>
+			{%endfor%}
+		</select>
+		<input type="Submit" onclick="deleteContract()" value="DELETE">
+	</form>
+</body>
+<script>
+	var con=document.getElementById("no"),conSelectedValue;
+	con.addEventListener("click",selectContract);
+		
+	function selectContract()
+	{
+		var x=document.getElementById("no").selectedIndex;
+		const y=document.getElementsByTagName("option")[x].value;
+		conSelectedValue=y;
+	}
+	function deleteContract()
+	{
+		console.log(conSelectedValue);
+		$.ajax({
+            type: "POST",
+            url: "{{ url_for('delete') }}",
+            data: {"name" : conSelectedValue},
+        })
+		alert("Contract Deleted");
+	}
+</script>
+</html>
