@@ -1,0 +1,1 @@
+Imported Collection named "Contract List" from "crudpymongo" app and verified its functionality

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="./css/style.css">
+	<h1> TRIGO Global Quality Solutions </h1>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+</head>
+<body>
+	<form class="border" method="POST">
+		<label> Operator </label><br>
+		<label for="ContractNo"> Contract </label>
+		<input type="text" id="ContractNo" name="Contract" placeholder="Contract Number">
+		<input type="number" id="Contract" name="ContractRev" placeholder="Contract Revision">
+		<input type="number" id="WI" name="WIRev" placeholder="Work Instruction Revision">
+		<input type="Submit" value="ADD" formaction='/add'><br>
+		<select class="list" id="no" size=2 title="List of Contracts">
+			{%for i in list%}
+				<option>{{i}}</option>
+			{%endfor%}
+		</select>
+		<input type="Submit" onclick="deleteContract()" value="DELETE"><br>
+	</form>
+	<form action="/partNo" class="border" method="POST">
+		<label for="PartNumber">Part Number:</label>
+        <input type="text" id="PartNumber" name="PartNo" onkeypress="myFunction(event)" value={{partNumber}}><br>
+        <label for="SerialNumber">Container Serial#: </label>
+        <input type="text" id="SerialNumber" name="SerialNo">
+        <label for="Quantity">Quantity: </label>
+        <input type="number" id="Quantity" name="Qnty">
+        <label for="Certification">Certified? </label>
+        <input type="text" id="Certification" name="Crtfd">
+	</form>
+</body>
+<script>
+	var con=document.getElementById("no"),conSelectedValue,partNumber;
+	con.addEventListener("click",selectContract);
+	
+	function myFunction(event) 
+	{
+		let text = document.getElementById("PartNumber").value;
+  		let key = event.code;
+		if (key == "Enter")
+		{
+			$.ajax({
+            type: "POST",
+            url: "{{ url_for('partNo') }}",
+            data: {"partNumber" : text},
+        	})
+			alert(text);
+		}	
+	}
+
+	function selectContract()
+	{
+		var x=document.getElementById("no").selectedIndex;
+		const y=document.getElementsByTagName("option")[x].value;
+		conSelectedValue=y;
+	}
+	function deleteContract()
+	{
+		console.log(conSelectedValue);
+		$.ajax({
+            type: "POST",
+            url: "{{ url_for('delete') }}",
+            data: {"name" : conSelectedValue},
+        })
+		alert("Contract Deleted");
+	}
+</script>
+</html>

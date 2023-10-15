@@ -1,0 +1,1 @@
+In this phase, Text boxes like Part Number, Serial Number, Quantity and Certified is added along with the Contract Number
