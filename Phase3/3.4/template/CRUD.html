@@ -1,0 +1,32 @@
+<html>
+<head>
+    <h1 style="text-align: center;">CONTRACT WITH LIST OF PART NUMBERS</h1>
+</head>
+<body>
+    <h2>CREATE DATA</h2>
+    <form method="post">
+        <label for="ContractNo">Contract Number: </label>
+        <input type="text" id="ContractNo" name="ContractInsert" placeholder="Contract Numbers">
+        <label for="PartNos">Part Number: </label>
+        <input type="number" id="PartNos" name="PartInsert" placeholder="Part Numbers">
+        <input type="submit" value="ADD" formaction="/create"> 
+    </form>
+    <h2>UPDATE DATA</h2>
+    <form method="post">
+        <label for="ContractNo">Contract Number: </label>
+        <input type="text" id="ContractNo" name="Contract" placeholder="Contract Numbers">
+        <label for="UpdatedPartNos">Updated Part Number: </label>
+        <input type="number" id="UpdatedPartNos" name="UpdatedPart" placeholder="Part Numbers to update">
+        <input type="submit" value="UPDATE" formaction="/update"> 
+    </form>
+    <h2>DELETE DATA</h2>
+    <form method="post">
+        <input type="radio" value="ContractNo" name="options">Contract Number</input>
+        <input type="radio" value="PartNo" name="options">Part Number</input>
+        <input type="radio" value="Collection" name="options">Collection</input><br>
+        <input type="text" name="Contract" placeholder="Contract to delete">
+        <input type="number" name="Part" placeholder="Part Numbers to delete">
+        <input type="submit" value="DELETE" formaction="/delete"> 
+    </form>
+</body>
+</html>
