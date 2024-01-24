@@ -1,0 +1,7 @@
+https://www.geeksforgeeks.org/upload-multiple-files-with-flask/
+https://www.geeksforgeeks.org/os-module-python-examples/
+https://www.geeksforgeeks.org/save-a-image-file-on-a-postgres-database-python/
+https://www.geeksforgeeks.org/how-to-retrieve-blob-datatype-from-postgres-with-python/
+https://realpython.com/image-processing-with-the-python-pillow-library/
+https://tutorial101.blogspot.com/2021/07/upload-multiple-images-using-python.html
+https://www.dev2qa.com/how-to-use-python-flask-to-display-images-from-postgres/
