@@ -1,1 +1,0 @@
-Developed code to upload an image inside Azure file storage using Python
