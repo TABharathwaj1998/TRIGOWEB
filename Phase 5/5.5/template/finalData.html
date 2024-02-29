@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="./css/style.css">
+	<h1> TRIGO Global Quality Solutions </h1>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+</head>
+<body>
+	<form class="border" method="POST">
+		<label> Operator </label><br>
+		<label for="ContractNo"> Contract </label>
+		<input type="text" id="ContractNo" name="Contract" placeholder="Contract Number">
+		<input type="text" id="Contract" name="ContractRev" placeholder="Contract Revision">
+		<input type="text" id="WI" name="WIRev" placeholder="Work Instruction Revision">
+		<input type="Submit" value="ADD" formaction="/add"><br>
+		<select class="list" id="no" size=2 title="List of Contracts">
+			{%for i in contractList%}
+				<option>{{i}}</option>
+			{%endfor%}
+		</select>
+		<input type="Submit" onclick="deleteContract()" value="DELETE"><br>
+	</form>
+	<form action="/partNo" class="border" method="POST">
+		<label for="PartNumber">Part Number:</label>
+        <input type="number" id="PartNumber" name="PartNo" value={{partNumber}}>
+		<label for="SerialNumber">Container Serial#: </label>
+        <input type="text" id="SerialNumber" name="SerialNo" value="{{serialNo}}">
+        <label for="Quantity">Quantity: </label>
+        <input type="number" id="Quantity" name="Qnty" value="{{quantity}}">
+        <label for="Certification">Certified? </label>
+        <input type="text" id="Certification" name="Crtfd" value="{{certified}}">
+        <input type="Submit" class = "hidden" formaction="/serialNo"><br>
+	</form>
+
+    <br>
+	<form method = "POST" action = "/final">
+		<label>Inspected: </label>
+		<input type="number" name="Insp" value="{{noOfInspected}}">
+		<h2> DEFECTS </h2>
+		<p id="Rjct"></p>
+		<h2> REWORK </h2>
+		<p id="Rwrk"></p>
+        <label>Rejected: </label>
+        <input type="number" name="Rejectvalue" value="{{noOfRejects}}"><br>
+        <label>Reworked: </label>
+        <input type="number" name="Reworkedvalue" value="{{noOfReworks}}"><br>
+        <label>OK For Line: </label>
+        <input type="number" value="{{OKForLine}}"><br><br>
+
+        <label>Notes:</label>
+        <input type="text" name="note"><br>
+		<input type="submit" value="Finished"><br>
+
+		<input type="file" name="filename[]" id="image_input" value="UPLOAD" multiple accept="image/jpg, image/jpeg, image/png"/>
+
+		<p id="display_image"></p>
+		
+
+		
+	</form>
+	
+	<script>
+		var d = {{ defects | tojson | safe}}, description={{ defect_descriptions | tojson | safe}};
+		var len = d.length
+		let textd = "", textr = "", defect = "", rework = "";
+		let j = 0;
+		for (let i = 0; i < d.length; i++) 
+		{
+			if (d[i] == '"' || d[i] == '[' || d[i] == ']' || d[i] == ' ')
+			{
+				continue;
+			}
+			else if(d[i] == ',' || d[i] >= len)
+			{
+				defect += "d";
+				rework += "r";
+				textd += "<input type='number' name="+defect+">";
+				textr += "<input type='number' name="+rework+">";
+				while (j < description.length)
+				{
+					if (description[j] == '"' || description[j] == '[' || description[j] == ']')
+					{
+						j*= 1;
+					}
+					else if(description[j] == ',' || j == description.length)
+					{
+						textd += "<br>";
+						textr += "<br>";
+						break;
+					}
+					else
+					{
+						textd += description[j];
+						textr += description[j];
+					}
+					j+=1;
+				}
+				defect = "";
+				rework = "";	
+			}
+			else
+			{
+				textd += "<label>"+d[i]+"</label>";
+				textr += "<label>"+d[i]+"</label>";
+				defect += d[i];
+				rework += d[i];
+			}
+		}
+		defect += "d";
+		rework += "r";
+		textd += "<input type='number' name="+defect+">";
+		textr += "<input type='number' name="+rework+">";
+		while (j < description.length)
+		{
+			if (description[j] == '"' || description[j] == '[' || description[j] == ']' || description[j] == ',' || description[j] == '')
+			{
+				j*= 1;
+			}
+			else
+			{
+				textd += description[j];
+				textr += description[j];
+			}
+			j+=1
+		}
+
+		document.getElementById("Rwrk").innerHTML = textr;
+		document.getElementById("Rjct").innerHTML = textd;
+	</script>
+
+
+
+</body>
+<script>
+	var con=document.getElementById("no"),conSelectedValue;
+	con.addEventListener("click",selectContract);
+
+	function selectContract()
+	{
+		var x=document.getElementById("no").selectedIndex;
+		const y=document.getElementsByTagName("option")[x].value;
+		conSelectedValue=y;
+	}
+	function deleteContract()
+	{
+		console.log(conSelectedValue);
+		$.ajax({
+            type: "POST",
+            url: "{{ url_for('delete') }}",
+            data: {"name" : conSelectedValue},
+        })
+		alert("Contract Deleted");
+	}
+</script>
+<script>
+	const image_input = document.querySelector("#image_input");
+	var uploaded_image = "";
+	image_input.addEventListener("change",function(e){
+		const files = e.target.files;
+		const output = document.querySelector("#display_image");
+
+		for(let i=0;i<files.length;i++)
+		{
+			const fileReader = new FileReader();
+			fileReader.addEventListener("load",function(event){
+				const file = event.target;
+				const op = document.createElement("output");
+				op.innerHTML = `<img src="${file.result}" title="${file.name}"/>`;
+				output.appendChild(op);
+			})
+
+			fileReader.readAsDataURL(files[i]);
+
+		}
+	})
+</script>
+</html>
