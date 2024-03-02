@@ -1,0 +1,1 @@
+Able to remove uploaded images

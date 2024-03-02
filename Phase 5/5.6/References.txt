@@ -1,0 +1,20 @@
+https://www.javatpoint.com/oprweb/test.jsp?filename=html-list-box
+https://www.geeksforgeeks.org/python-using-for-loop-in-flask/
+https://www.w3schools.com/jsref/prop_option_value.asp     Today(29APR23, I used option value function to return the value of selected index)
+https://github.com/jimdevops19/codesnippets/tree/main/Flask%20POST%20Request%20with%20AJAX (01MAY23)
+https://www.w3schools.com/jsref/event_key_keycode.asp
+https://www.w3schools.com/python/python_dictionaries_loop.asp
+https://www.geeksforgeeks.org/python-removing-dictionary-from-list-of-dictionaries/
+https://www.w3schools.com/css/tryit.asp?filename=trycss_display_none
+
+For Rejects and Reworks text boxes
+https://stackoverflow.com/questions/23038710/accessing-python-list-in-javascript-as-an-array
+https://www.w3schools.com/js/tryit.asp?filename=tryjs_loop_for
+
+https://stackoverflow.com/questions/37955081/python-nameerror-variable-not-defined
+https://decodepython.com/fixing-unboundlocalerror-in-python-a-simple-guide-with-code-samples/
+https://www.w3schools.com/python/python_strings_concatenate.asp
+
+https://youtu.be/dCEMu-rm1tg - Display images uploaded using Javascript
+https://www.youtube.com/watch?v=EaBSeNSc-2c - Display "x" thumbnail near image
+https://www.youtube.com/watch?v=pxAUJtugfAg - Remove image using RemoveChildNode
