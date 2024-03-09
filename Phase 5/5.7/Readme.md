@@ -1,0 +1,1 @@
+Successfully sent url of images that are displayed after uploading after clicking the Finished button
