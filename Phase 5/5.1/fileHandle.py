@@ -6,7 +6,7 @@ from PIL import Image
 
 app = Flask(__name__,template_folder="template")
 
-conn = psycopg2.connect(host="localhost", port=5432, database="postgres", user="postgres", password="Rise@1998")
+conn = psycopg2.connect(host="localhost", port=5432, database="postgres", user="postgres", password="xxxx")
 cur = conn.cursor()
 
 UPLOAD_FOLDER = 'C:/Users/tabha/Documents/Python/uploadFiles'
