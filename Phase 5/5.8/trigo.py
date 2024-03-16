@@ -36,7 +36,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 client = MongoClient("mongodb://localhost:27017")
 print(client)
-conn = psycopg2.connect(host="localhost", port=5432, database="postgres", user="postgres", password="Rise@1998")
+conn = psycopg2.connect(host="localhost", port=5432, database="postgres", user="postgres", password="xxxx")
 cur = conn.cursor()
 account_url = "https://trgoimgs.blob.core.windows.net"
 default_credential = "sfK/PhYe1Rpg540aEBBCj9R0ORbZ84U6ByyQIJyAwFfU6epv5q5snrpTjX6GdT/P4fuN0Bl7p+WD+ASt2lxQag=="
