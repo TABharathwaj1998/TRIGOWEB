@@ -30,7 +30,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 client = MongoClient("mongodb://localhost:27017")
 print(client)
-conn = psycopg2.connect(host="localhost", port=5432, database="postgres", user="postgres", password="Rise@1998")
+conn = psycopg2.connect(host="localhost", port=5432, database="postgres", user="postgres", password="xxxx")
 cur = conn.cursor()
 
 @app.route("/",methods=["GET"])
