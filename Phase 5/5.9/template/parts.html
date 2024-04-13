@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="./css/style.css">
+	<h1> TRIGO Global Quality Solutions </h1>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+</head>
+<body>
+	<form class="border" method="POST">
+		<label> Operator </label><br>
+		<label for="ContractNo"> Contract </label>
+		<input type="text" id="ContractNo" name="Contract" placeholder="Contract Number">
+		<input type="text" id="Contract" name="ContractRev" placeholder="Contract Revision">
+		<input type="text" id="WI" name="WIRev" placeholder="Work Instruction Revision">
+		<input type="Submit" value="ADD" formaction="/add"><br>
+		<select class="list" id="no" size=2 title="List of Contracts">
+			{%for i in contractList%}
+				<option>{{i}}</option>
+			{%endfor%}
+		</select>
+		<input type="Submit" onclick="deleteContract()" value="DELETE"><br>
+	</form>
+	<form action="/partNo" class="border" method="POST">
+		<label for="PartNumber">Part Number:</label>
+        <input type="number" id="PartNumber" name="PartNo" value=0{{partNumber}}>
+		<input type="Submit" class = "hidden" formaction="/partNo"><br>
+	</form>
+</body>
+<script>
+	var con=document.getElementById("no"),conSelectedValue;
+	con.addEventListener("click",selectContract);
+
+	function selectContract()
+	{
+		var x=document.getElementById("no").selectedIndex;
+		const y=document.getElementsByTagName("option")[x].value;
+		conSelectedValue=y;
+	}
+	function deleteContract()
+	{
+		console.log(conSelectedValue);
+		$.ajax({
+            type: "POST",
+            url: "{{ url_for('delete') }}",
+            data: {"name" : conSelectedValue},
+        })
+		alert("Contract Deleted");
+	}
+</script>
+<script>
+	const image_input = document.querySelector("#image_input");
+	
+	const output = document.querySelector("#display_image");
+	var imageArray = []; 
+	var uploaded_image = "";
+	image_input.addEventListener("change",function(e){
+		const files = e.target.files;
+		
+
+		for(let i=0;i<files.length;i++)
+		{
+			const fileReader = new FileReader();
+			fileReader.addEventListener("load",function(event){
+				const file = event.target;
+				imageArray.push(file.result);
+				const op = document.createElement("output");
+				op.name = "uploadedImg";
+				op.innerHTML = `<div class = "image">
+									<img src="${file.result}" title="${file.name}"/>
+									<span onclick="deleteImage(${i})">&times;</span>
+								</div>`;
+				output.appendChild(op);
+
+			})
+			fileReader.readAsDataURL(files[i]);
+		}
+	})
+	function deleteImage(index)
+	{
+		imageArray.splice(index,1);
+		let opRemove = document.querySelector("#display_image");
+		opRemoveTag = opRemove.getElementsByTagName("output");
+		let IMAGE = opRemoveTag[index];
+		output.removeChild(IMAGE);
+		
+	}
+
+	function sendImage()
+	{
+		const data = ["TAR","TAA","TAB"];
+
+		var jsonString = JSON.stringify(data);
+
+        // Send the JSON string to the server-side using an AJAX request
+
+		$.ajax({   
+			url: "{{ url_for('final') }}",   
+			method: "POST", 
+			contentType: 'application/json',  
+			data: {"array" : imageArray},   
+		})
+		
+		alert(imageArray.length);
+	}
+
+</script>
+</html>

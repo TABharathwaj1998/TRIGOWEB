@@ -1,0 +1,1 @@
+Fixed bugs related to rejects obtained from sum of defects in a contract 
